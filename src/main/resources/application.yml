@@ -61,4 +61,3 @@ data:
     pageSize: 10
 app:
   cache:
-    ttl: 10
