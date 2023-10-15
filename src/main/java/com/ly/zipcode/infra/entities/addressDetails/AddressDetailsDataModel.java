@@ -12,16 +12,15 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddressDetailsDataModel {
-    private UUID id;
-    private String zipcode;
-    private String address;
-    private String additionalAddress;
-    private String neighborhood;
-    private String city;
-    private String state;
-    private String ibge;
-    private String gia;
-    private String ddd;
-    private String siafi;
-
+  private UUID id;
+  private String zipcode;
+  private String address;
+  private String additionalAddress;
+  private String neighborhood;
+  private String city;
+  private String state;
+  private String ibge;
+  private String gia;
+  private String ddd;
+  private String siafi;
 }

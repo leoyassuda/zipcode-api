@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+.fleet/
+
+### ENV ###
+infra/.env
+infra/.env.pgadmin
+infra/.env.pgdb.primary
+infra/.env.pgdb.replica
+

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AddressDetailsDataModelMapper {
-    AddressDetailsDataModel toDataModel(AddressDetails addressDetails);
+  AddressDetailsDataModel toDataModel(AddressDetails addressDetails);
 
-    List<AddressDetailsDataModel> toDataModel(List<AddressDetails> addressDetailsList);
+  List<AddressDetailsDataModel> toDataModel(List<AddressDetails> addressDetailsList);
 }

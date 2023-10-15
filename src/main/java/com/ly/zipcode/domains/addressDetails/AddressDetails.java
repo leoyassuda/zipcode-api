@@ -14,29 +14,29 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddressDetails implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1173227188643206849L;
+  @Serial
+  private static final long serialVersionUID = 1173227188643206849L;
 
-    private UUID id;
+  private UUID id;
 
-    private String zipcode;
+  private String zipcode;
 
-    private String address;
+  private String address;
 
-    private String additionalAddress;
+  private String additionalAddress;
 
-    private String neighborhood;
+  private String neighborhood;
 
-    private String city;
+  private String city;
 
-    private String state;
+  private String state;
 
-    private String ibge;
+  private String ibge;
 
-    private String gia;
+  private String gia;
 
-    private String ddd;
+  private String ddd;
 
-    private String siafi;
+  private String siafi;
 
 }

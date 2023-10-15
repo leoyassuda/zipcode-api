@@ -1,0 +1,64 @@
+server:
+  port: ${SERVER_APP_PORT:8080}
+spring:
+  main:
+    banner-mode: off
+  cache:
+    redis:
+      time-to-live: 10s
+    type: redis
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 30000
+      repositories:
+        enabled: false
+  datasource:
+    hikari:
+      idle-timeout: 600000
+      connection-timeout: 40000
+      max-lifetime: 1200000
+    read:
+      jdbc-url: jdbc:postgresql://${DB_REPLICA_HOST:localhost}:${DB_REPLICA_PORT:5433}/zipcode_db?currentSchema=public
+      username: ${POSTGRES_USER:user123}
+      password: ${POSTGRES_PASSWORD:pass123}
+      platform: postgresql
+      hikari:
+        connection-timeout: 30000
+        idle-timeout: 600000
+        max-lifetime: 1800000
+        maximum-pool-size: 10
+        minimum-idle: 5
+        pool-name: ReadHikariPool
+        schema: public
+    write:
+      jdbc-url: jdbc:postgresql://${DB_PRIMARY_HOST:localhost}:${DB_PRIMARY_PORT:5432}/zipcode_db?currentSchema=public
+      username: ${POSTGRES_USER:user123}
+      password: ${POSTGRES_PASSWORD:pass123}
+      platform: postgresql
+      hikari:
+        connection-timeout: 30000
+        idle-timeout: 600000
+        max-lifetime: 1800000
+        maximum-pool-size: 10
+        minimum-idle: 5
+        pool-name: WriteHikariPool
+        schema: public
+  docker:
+    compose:
+      enabled: false
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: debug
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs
+data:
+  repository:
+    pageSize: 10
+app:
+  cache:
+    ttl: 10

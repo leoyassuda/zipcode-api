@@ -1,0 +1,95 @@
+x-postgres-common:
+  &postgres-common
+  image: postgres:14-alpine
+  user: postgres
+  restart: always
+  healthcheck:
+    test: 'pg_isready -U user --dbname=postgres'
+    interval: 10s
+    timeout: 5s
+    retries: 5
+
+services:
+#  app:
+#    image: zipcode-app:latest
+#    pull_policy: always
+#    container_name: ${DOCKER_IMAGE_NAME}
+#    build:
+#      dockerfile: Dockerfile
+#    env_file:
+#      - .env
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - zipcode-network
+
+  postgres_primary:
+    <<: *postgres-common
+    ports:
+      - 5432:5432
+    env_file:
+      - .env.pgdb.primary
+    command: |
+      postgres 
+      -c wal_level=replica 
+      -c hot_standby=on 
+      -c max_wal_senders=10 
+      -c max_replication_slots=10 
+      -c hot_standby_feedback=on
+    volumes:
+      - ./scripts/00_init.sql:/docker-entrypoint-initdb.d/00_init.sql
+      - ./scripts/01_init.sql:/docker-entrypoint-initdb.d/01_init.sql
+    networks:
+      - zipcode-network
+
+  postgres_replica:
+    <<: *postgres-common
+    ports:
+      - 5433:5432
+    env_file:
+      - .env.pgdb.replica
+    command: |
+      bash -c "
+      until pg_basebackup --pgdata=/var/lib/postgresql/data -R --slot=replication_slot --host=postgres_primary --port=5432
+      do
+      echo 'Waiting for primary to connect...'
+      sleep 1s
+      done
+      echo 'Backup done, starting replica...'
+      chmod 0700 /var/lib/postgresql/data
+      postgres
+      "
+    depends_on:
+      - postgres_primary
+    networks:
+      - zipcode-network
+
+  redis:
+    image: redis:latest
+    container_name: zipcode-redis
+    hostname: redis
+    ports:
+      - '6379:6379'
+    networks:
+      - zipcode-network
+
+  redis_insight:
+    image: redislabs/redisinsight:latest
+    container_name: redis_insight
+    ports:
+      - 8001:8001
+    networks:
+      - zipcode-network
+
+  pg_admin:
+    image: dpage/pgadmin4
+    ports:
+      - "8888:80"
+    env_file:
+      - .env.pgadmin
+    networks:
+      - zipcode-network
+
+networks:
+  zipcode-network:
+    driver: bridge

@@ -1,0 +1,29 @@
+CREATE USER replicator WITH REPLICATION ENCRYPTED PASSWORD 'replicator_password';
+SELECT pg_create_physical_replication_slot('replication_slot');
+--
+-- CREATE
+--     EXTENSION "uuid-ossp";
+--
+-- CREATE TABLE address_details
+-- (
+--     id                 UUID PRIMARY KEY,
+--     zipcode            VARCHAR(255),
+--     address            VARCHAR(255),
+--     additional_address VARCHAR(255),
+--     neighborhood       VARCHAR(255),
+--     city               VARCHAR(255),
+--     state              VARCHAR(255),
+--     ibge               VARCHAR(255),
+--     gia                VARCHAR(255),
+--     ddd                VARCHAR(255),
+--     siafi              VARCHAR(255)
+-- );
+--
+-- INSERT INTO address_details (zipcode, address, additional_address, neighborhood, city, state, ibge, gia, ddd, siafi)
+-- VALUES ('01310-200', 'Avenida Paulista', 'Apto 404', 'Bela Vista', 'São Paulo', 'SP', '3550308', '1004', '11', '7107');
+--
+-- INSERT INTO address_details (zipcode, address, additional_address, neighborhood, city, state, ibge, gia, ddd, siafi)
+-- VALUES ('70050-906', 'SHCS 710', 'Bloco D, Apt 203', 'Asa Sul', 'Brasília', 'DF', '5300108', '1002', '61', '9701');
+--
+-- INSERT INTO address_details (zipcode, address, additional_address, neighborhood, city, state, ibge, gia, ddd, siafi)
+-- VALUES ('90010-230', 'Rua da Praia', 'Casa 15', 'Centro', 'Porto Alegre', 'RS', '4314902', '4301', '51', '8801');

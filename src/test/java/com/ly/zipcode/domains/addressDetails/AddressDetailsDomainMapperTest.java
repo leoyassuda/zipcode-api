@@ -10,39 +10,40 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {AddressDetailsDomainMapperImpl.class})
+@ContextConfiguration(classes = { AddressDetailsDomainMapperImpl.class })
 class AddressDetailsDomainMapperTest {
 
-    @Autowired
-    private AddressDetailsDomainMapper mapper;
+  @Autowired
+  private AddressDetailsDomainMapper mapper;
 
-    @Test
-    void givenDataModel_whenCallMapping_thenReturnCorrectDomain() {
-        var addressMocked = AddressUtils.generateAddress(AddressDetailsDataModel.class);
+  @Test
+  void givenDataModel_whenCallMapping_thenReturnCorrectDomain() {
+    var addressMocked = AddressUtils.generateAddress(AddressDetailsDataModel.class);
 
-        var addressResult = mapper.toDomain(addressMocked);
+    var addressResult = mapper.toDomain(addressMocked);
 
-        assertNotNull(addressMocked);
-        assertEquals(addressMocked.getId(), addressResult.getId());
-        assertEquals(addressMocked.getZipcode(), addressResult.getZipcode());
+    assertNotNull(addressMocked);
+    assertEquals(addressMocked.getId(), addressResult.getId());
+    assertEquals(addressMocked.getZipcode(), addressResult.getZipcode());
 
-    }
+  }
 
-    @Test
-    void givenDataModelList_whenCallMapping_thenReturnCorrectDomainList() {
-        var addressDetailsDataModelList = Arrays.asList(
-                AddressUtils.generateAddress(AddressDetailsDataModel.class),
-                AddressUtils.generateAddress(AddressDetailsDataModel.class)
-        );
+  @Test
+  void givenDataModelList_whenCallMapping_thenReturnCorrectDomainList() {
+    var addressDetailsDataModelList = Arrays.asList(
+        AddressUtils.generateAddress(AddressDetailsDataModel.class),
+        AddressUtils.generateAddress(AddressDetailsDataModel.class)
+    );
 
-        var addressResultList = mapper.toDomain(addressDetailsDataModelList);
+    var addressResultList = mapper.toDomain(addressDetailsDataModelList);
 
-        assertEquals(2, addressResultList.size());
-        assertEquals(addressDetailsDataModelList.get(0).getZipcode(), addressResultList.get(0).getZipcode());
+    assertEquals(2, addressResultList.size());
+    assertEquals(addressDetailsDataModelList.get(0).getZipcode(), addressResultList.get(0).getZipcode());
 
-    }
+  }
 
 }
