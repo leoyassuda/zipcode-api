@@ -19,11 +19,17 @@ public class AddressDetailsUseCase implements IUseCase<AddressDetails> {
   private final CreateAddressDetailsUseCase createAddressDetailsUseCase;
   private final UpdateAddressDetailsUseCase updateAddressDetailsUseCase;
   private final DeleteAddressDetailsUseCase deleteAddressDetailsUseCase;
+  private final FindByZipCodeAddressDetailsUseCase findByZipCodeAddressDetailsUseCase;
 
   @Cacheable(value = "addressDetailsCache", key = "#id")
   @Override
   public AddressDetails findById(UUID id) {
     return findByIdAddressDetailsUseCase.execute(id);
+  }
+
+  @Cacheable(value = "addressDetailsCache", key = "#zipcode")
+  public AddressDetails findByZipCode(String zipcode) {
+    return findByZipCodeAddressDetailsUseCase.execute(zipcode);
   }
 
   @Cacheable(value = "addressDetailsCache", key = "'allAddressDetails-' + #pageSize + '-' + #size")
@@ -32,7 +38,7 @@ public class AddressDetailsUseCase implements IUseCase<AddressDetails> {
     return findAllAddressDetailsUseCase.execute(pageSize, size);
   }
 
-  @CacheEvict(value = "addressDetailsCache ", allEntries = true)
+  @CacheEvict(value = "addressDetailsCache", allEntries = true)
   @Override
   public AddressDetails create(AddressDetails addressDetails) {
     return createAddressDetailsUseCase.execute(addressDetails);

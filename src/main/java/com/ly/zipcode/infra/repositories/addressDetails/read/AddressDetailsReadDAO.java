@@ -17,6 +17,7 @@ import java.util.UUID;
 public class AddressDetailsReadDAO implements IReadDAO<AddressDetailsDataModel> {
 
   private final String SQL_FIND_BY_ID = "select * from address_details where id = ?";
+  private final String SQL_FIND_BY_ZIPCODE = "select * from address_details where zipcode = ?";
   private final String SQL_FIND_ALL = "select * from address_details limit ? offset ?";
 
   private final JdbcTemplate readJdbcTemplate;
@@ -36,5 +37,11 @@ public class AddressDetailsReadDAO implements IReadDAO<AddressDetailsDataModel> 
   public List<AddressDetailsDataModel> findAll(int pageSize, int page) {
     log.info("Getting all authors");
     return readJdbcTemplate.query(SQL_FIND_ALL, new AddressDetailsDataModelRowMapper(), pageSize, page);
+  }
+
+  public AddressDetailsDataModel findByZipcode(String zipcode) {
+//    zipcode = zipcode.replaceAll("[^a-zA-Z0-9]", "");
+    log.info("Getting author by zipcode: {}", zipcode);
+    return readJdbcTemplate.queryForObject(SQL_FIND_BY_ZIPCODE, new AddressDetailsDataModelRowMapper(), zipcode);
   }
 }

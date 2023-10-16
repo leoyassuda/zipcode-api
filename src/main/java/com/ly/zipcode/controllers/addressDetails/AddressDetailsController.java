@@ -3,9 +3,12 @@ package com.ly.zipcode.controllers.addressDetails;
 import com.ly.zipcode.controllers.IController;
 import com.ly.zipcode.domains.addressDetails.AddressDetails;
 import com.ly.zipcode.useCases.addressDetails.AddressDetailsUseCase;
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +25,11 @@ public class AddressDetailsController implements IController<AddressDetails> {
   @Override
   public ResponseEntity<AddressDetails> findById(UUID id) {
     return ResponseEntity.ok(addressDetailsUseCase.findById(id));
+  }
+
+  @GetMapping("/zipcode/{zipcode}")
+  public ResponseEntity<AddressDetails> findByZipCode(@PathVariable @Pattern(regexp = "\\d{5}-\\d{3}", message = "error.api.addressDetails.id.invalid") String zipcode) {
+    return ResponseEntity.ok(addressDetailsUseCase.findByZipCode(zipcode));
   }
 
   @Override

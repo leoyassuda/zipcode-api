@@ -48,9 +48,38 @@ spring:
   docker:
     compose:
       enabled: false
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connect-timeout: 5000
+            read-timeout: 5000
+            logger-level: basic
+      compression:
+        request:
+          enabled: true
+        response:
+          enabled: true
+      lazy-attributes-resolution: true
+      circuitbreaker:
+        enabled: true
+        alphanumeric-ids:
+          enabled: true
+resilience4j:
+  circuitbreaker:
+    instances:
+      ViaCEPClient:
+        minimumNumberOfCalls: 3
+        failure-rate-threshold: 10
+  timelimiter:
+    instances:
+      ViaCEPClient:
+        timeoutDuration: 10s
 logging:
   level:
     org.springframework.jdbc.core.JdbcTemplate: debug
+    com.ly.zipcode.infra.adapters.api.ViaCEPClient: debug
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

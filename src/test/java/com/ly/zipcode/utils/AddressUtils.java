@@ -114,4 +114,21 @@ public class AddressUtils {
     int siafi = 100000 + random.nextInt(900000);
     return String.valueOf(siafi);
   }
+
+  public static String asJsonString(AddressDetails addressDetails) {
+    return "{" +
+        "\"id\":\"" + (addressDetails.getId() != null ? addressDetails.getId() : "") + "\"," +
+        "\"zipcode\":\"" + (addressDetails.getZipcode() != null ? addressDetails.getZipcode() : "") + "\"," +
+        "\"address\":\"" + (addressDetails.getAddress() != null ? addressDetails.getAddress() : "") + "\"," +
+        "\"additionalAddress\":\"" + (addressDetails.getAdditionalAddress() != null ? addressDetails.getAdditionalAddress() : "") + "\"," +
+        "\"neighborhood\":\"" + (addressDetails.getNeighborhood() != null ? addressDetails.getNeighborhood() : "") + "\"," +
+        "\"city\":\"" + (addressDetails.getCity() != null ? addressDetails.getCity() : "") + "\"," +
+        "\"state\":\"" + (addressDetails.getState() != null ? addressDetails.getState() : "") + "\"," +
+        "\"ibge\":\"" + (addressDetails.getIbge() != null ? addressDetails.getIbge() : "") + "\"," +
+        "\"gia\":\"" + (addressDetails.getGia() != null ? addressDetails.getGia() : "") + "\"," +
+        "\"ddd\":\"" + (addressDetails.getDdd() != null ? addressDetails.getDdd() : "") + "\"," +
+        "\"siafi\":\"" + (addressDetails.getSiafi() != null ? addressDetails.getSiafi() : "") + "\"" +
+        "}";
+  }
+
 }

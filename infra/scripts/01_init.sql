@@ -4,12 +4,12 @@ CREATE
 CREATE TABLE address_details
 (
     id                 UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    zipcode            VARCHAR(255),
-    address            VARCHAR(255),
+    zipcode            VARCHAR(255) NOT NULL UNIQUE,
+    address            VARCHAR(255) NOT NULL,
     additional_address VARCHAR(255),
-    neighborhood       VARCHAR(255),
-    city               VARCHAR(255),
-    state              VARCHAR(255),
+    neighborhood       VARCHAR(255) NOT NULL,
+    city               VARCHAR(255) NOT NULL,
+    state              VARCHAR(255) NOT NULL,
     ibge               VARCHAR(255),
     gia                VARCHAR(255),
     ddd                VARCHAR(255),

@@ -1,5 +1,6 @@
 package com.ly.zipcode.domains.addressDetails;
 
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class AddressDetails implements Serializable {
 
   private UUID id;
 
+  @Pattern(regexp = "\\d{5}-\\d{3}", message = "error.api.addressDetails.id.invalid")
   private String zipcode;
 
   private String address;
