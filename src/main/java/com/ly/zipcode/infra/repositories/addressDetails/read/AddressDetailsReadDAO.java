@@ -40,7 +40,6 @@ public class AddressDetailsReadDAO implements IReadDAO<AddressDetailsDataModel> 
   }
 
   public AddressDetailsDataModel findByZipcode(String zipcode) {
-//    zipcode = zipcode.replaceAll("[^a-zA-Z0-9]", "");
     log.info("Getting author by zipcode: {}", zipcode);
     return readJdbcTemplate.queryForObject(SQL_FIND_BY_ZIPCODE, new AddressDetailsDataModelRowMapper(), zipcode);
   }
