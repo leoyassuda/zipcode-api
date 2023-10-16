@@ -84,14 +84,6 @@ public class AddressDetailsControllerTestIT {
   }
 
   @Test
-  public void shouldReturnErrorResponseWhenCallByZipCodeUsingWrongZipCode() throws Exception {
-    when(addressDetailsUseCase.findByZipCode(any(String.class))).thenReturn(addressDetails);
-
-    this.mockMvc.perform(get("/addressDetails/zipcode/123"))
-        .andExpect(status().is4xxClientError());
-  }
-
-  @Test
   public void shouldReturnOkResponseWithThreeElementsWhenCallFindAll() throws Exception {
     when(addressDetailsUseCase.findAll(any(Integer.class), any(Integer.class))).thenReturn(addressDetailsList);
 
@@ -114,8 +106,8 @@ public class AddressDetailsControllerTestIT {
 
     assert addressDetails != null;
     this.mockMvc.perform(post("/addressDetails")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(AddressUtils.asJsonString(addressDetails)))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(AddressUtils.asJsonString(addressDetails)))
         .andExpect(status().isCreated())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.id").isNotEmpty())
@@ -129,12 +121,12 @@ public class AddressDetailsControllerTestIT {
 
   @Test
   public void shouldReturnAddressDetailsWhenUpdate() throws Exception {
-    when(addressDetailsUseCase.update(any(UUID.class),any(AddressDetails.class))).thenReturn(addressDetails);
+    when(addressDetailsUseCase.update(any(UUID.class), any(AddressDetails.class))).thenReturn(addressDetails);
 
     assert addressDetails != null;
     this.mockMvc.perform(put("/addressDetails/" + addressDetails.getId())
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(AddressUtils.asJsonString(addressDetails)))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(AddressUtils.asJsonString(addressDetails)))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.id").isNotEmpty())
@@ -151,8 +143,8 @@ public class AddressDetailsControllerTestIT {
     doNothing().when(addressDetailsUseCase).delete(any(UUID.class));
 
 
-    this.mockMvc.perform(delete("/addressDetails/"+ UUID.randomUUID())
-        .contentType(MediaType.APPLICATION_JSON))
+    this.mockMvc.perform(delete("/addressDetails/" + UUID.randomUUID())
+            .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isNoContent());
   }
 

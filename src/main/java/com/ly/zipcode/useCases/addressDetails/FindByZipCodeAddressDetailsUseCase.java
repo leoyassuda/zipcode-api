@@ -3,8 +3,6 @@ package com.ly.zipcode.useCases.addressDetails;
 import com.ly.zipcode.domains.addressDetails.AddressDetails;
 import com.ly.zipcode.domains.addressDetails.AddressDetailsDomainMapper;
 import com.ly.zipcode.infra.adapters.api.ViaCEPClient;
-import com.ly.zipcode.infra.adapters.api.ViaCEPResponseMapper;
-import com.ly.zipcode.infra.entities.addressDetails.AddressDetailsDataModelMapper;
 import com.ly.zipcode.infra.repositories.addressDetails.read.AddressDetailsReadDAO;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +18,6 @@ public class FindByZipCodeAddressDetailsUseCase {
   private final AddressDetailsReadDAO addressDetailsReadDAO;
 
   private final AddressDetailsDomainMapper addressDetailsDomainMapper;
-
-  private final AddressDetailsDataModelMapper addressDetailsDataModelMapper;
-
-  private final ViaCEPResponseMapper viaCEPResponseMapper;
 
   private final ViaCEPClient viaCep;
 

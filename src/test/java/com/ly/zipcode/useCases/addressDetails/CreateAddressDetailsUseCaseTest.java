@@ -10,12 +10,14 @@ import com.ly.zipcode.utils.AddressUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -34,13 +36,18 @@ class CreateAddressDetailsUseCaseTest {
   @Spy
   AddressDetailsDataModelMapper addressDetailsDataModelMapper = Mappers.getMapper(AddressDetailsDataModelMapper.class);
 
+  @InjectMocks
+  CreateAddressDetailsUseCase createAddressDetailsUseCase;
+
   @Test
   void execute() {
     var addressDetails = AddressUtils.generateAddress(AddressDetails.class);
 
     when(addressDetailsWriteDAO.create(any(AddressDetailsDataModel.class))).thenReturn(UUID.randomUUID());
-    when(addressDetailsReadDAORead.findById(any(UUID.class))).thenReturn(AddressUtils.generateAddress(AddressDetailsDataModel.class));
+    when(addressDetailsReadDAORead.findById(any(UUID.class))).thenReturn(AddressUtils.generateAddress(
+        AddressDetailsDataModel.class));
 
-
+    var result = createAddressDetailsUseCase.execute(addressDetails);
+    assertNotNull(result.getId());
   }
 }

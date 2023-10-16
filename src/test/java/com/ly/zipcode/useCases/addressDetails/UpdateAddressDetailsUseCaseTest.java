@@ -48,7 +48,8 @@ class UpdateAddressDetailsUseCaseTest {
     when(addressDetailsWriteDAO.update(any(UUID.class), any(AddressDetailsDataModel.class))).thenReturn(1);
     when(addressDetailsReadDAO.findById(any(UUID.class))).thenReturn(addressDetailsDataModelTest);
 
-    var addressDetailsUpdated = updateAddressDetailsUseCase.execute(id, AddressUtils.generateAddress(AddressDetails.class));
+    var addressDetailsUpdated = updateAddressDetailsUseCase.execute(id,
+        AddressUtils.generateAddress(AddressDetails.class));
 
     verify(addressDetailsWriteDAO).update(any(UUID.class), any(AddressDetailsDataModel.class));
     verify(addressDetailsReadDAO).findById(any(UUID.class));

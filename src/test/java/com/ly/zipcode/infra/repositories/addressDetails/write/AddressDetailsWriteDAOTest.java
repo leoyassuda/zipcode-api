@@ -66,8 +66,9 @@ class AddressDetailsWriteDAOTest {
   @Test
   void whenUpdate_thenReturnValidRowNumber() {
     var addressDetailsDataModel = AddressUtils.generateAddress(AddressDetailsDataModel.class);
-    addressDetailsDataModel.setId(null);
+    assert addressDetailsDataModel != null;
     var id = addressDetailsDataModel.getId();
+    addressDetailsDataModel.setId(null);
 
     when(jdbcTemplate.update(
         eq("update address_details set zipcode = ?, address = ?, additional_address = ?, neighborhood = ?, city = ?, state = ?, ibge = ?, gia = ?, ddd = ?, siafi = ? where id = ?"),

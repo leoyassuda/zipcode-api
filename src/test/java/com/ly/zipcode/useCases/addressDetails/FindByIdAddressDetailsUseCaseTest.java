@@ -34,7 +34,8 @@ class FindByIdAddressDetailsUseCaseTest {
   void execute() {
     var uuid = UUID.randomUUID();
 
-    when(addressDetailsReadDAO.findById(any(UUID.class))).thenReturn(AddressUtils.generateAddress(AddressDetailsDataModel.class));
+    when(addressDetailsReadDAO.findById(any(UUID.class))).thenReturn(AddressUtils.generateAddress(
+        AddressDetailsDataModel.class));
 
     var addressDetails = findByIdAddressDetailsUseCase.execute(uuid);
     assertNotNull(addressDetails);
