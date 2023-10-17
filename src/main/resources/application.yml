@@ -72,6 +72,9 @@ resilience4j:
       ViaCEPClient:
         minimumNumberOfCalls: 2
         failure-rate-threshold: 10
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 5s
+
   timelimiter:
     instances:
       ViaCEPClient:
@@ -94,3 +97,16 @@ data:
     pageSize: 10
 app:
   cache:
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+    ratelimiters:
+      enabled: true

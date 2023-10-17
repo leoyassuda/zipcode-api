@@ -29,18 +29,18 @@ public class AddressDetailsReadDAO implements IReadDAO<AddressDetailsDataModel> 
 
   @Override
   public AddressDetailsDataModel findById(UUID id) {
-    log.info("Getting author by ID: {}", id);
+    log.info("Getting address-details by ID: {}", id);
     return readJdbcTemplate.queryForObject(SQL_FIND_BY_ID, new AddressDetailsDataModelRowMapper(), id);
   }
 
   @Override
   public List<AddressDetailsDataModel> findAll(int pageSize, int page) {
-    log.info("Getting all authors");
+    log.info("Getting all addresses-details");
     return readJdbcTemplate.query(SQL_FIND_ALL, new AddressDetailsDataModelRowMapper(), pageSize, page);
   }
 
   public AddressDetailsDataModel findByZipcode(String zipcode) {
-    log.info("Getting author by zipcode: {}", zipcode);
+    log.info("Getting address-details by zipcode: {}", zipcode);
     return readJdbcTemplate.queryForObject(SQL_FIND_BY_ZIPCODE, new AddressDetailsDataModelRowMapper(), zipcode);
   }
 }

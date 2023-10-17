@@ -34,7 +34,7 @@ public class AddressDetailsWriteDAO implements IWriteDAO<AddressDetailsDataModel
   @Transactional
   @Override
   public UUID create(AddressDetailsDataModel addressDetailsDataModel) {
-    log.info("Create post: {}", addressDetailsDataModel);
+    log.info("Create addressDetailsDataModel: {}", addressDetailsDataModel);
 
     var keyHolder = new GeneratedKeyHolder();
     readJdbcTemplate.update(connection -> {
@@ -58,7 +58,7 @@ public class AddressDetailsWriteDAO implements IWriteDAO<AddressDetailsDataModel
   @Transactional
   @Override
   public int update(UUID id, AddressDetailsDataModel addressDetailsDataModel) {
-    log.info("Update post: {}", id);
+    log.info("Update addressDetailsDataModel: {}", id);
     var updateSql = "update address_details set ";
 
     List<String> setClauses = new ArrayList<>();
@@ -94,7 +94,7 @@ public class AddressDetailsWriteDAO implements IWriteDAO<AddressDetailsDataModel
   @Transactional
   @Override
   public void delete(UUID id) {
-    log.info("Delete post: {}", id);
+    log.info("Delete addressDetailsDataModel: {}", id);
     readJdbcTemplate.update(SQL_DELETE, id);
   }
 }

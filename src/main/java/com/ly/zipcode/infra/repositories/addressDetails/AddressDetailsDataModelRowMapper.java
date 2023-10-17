@@ -12,9 +12,9 @@ public class AddressDetailsDataModelRowMapper implements RowMapper<AddressDetail
 
   @Override
   public AddressDetailsDataModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-    var authorId = rs.getObject("id", java.util.UUID.class);
+    var addressDetailsDataModel = rs.getObject("id", java.util.UUID.class);
     return AddressDetailsDataModel.builder()
-        .id(authorId)
+        .id(addressDetailsDataModel)
         .zipcode(rs.getString("zipcode"))
         .address(rs.getString("address"))
         .additionalAddress(rs.getString("additional_address"))

@@ -28,6 +28,7 @@ database and return the information. If not, the API will return from the databa
 - Docker and Docker-Compose
 - JDK 21
 - Maven 3
+- Makefile
 
 
 ```shell
@@ -47,6 +48,12 @@ cp .env.pgdb.primary.example .env.pgdb.primary
 cp .env.pgdb.replica.example .env.pgdb.replica
 cp .env.pgadmin.example .env.pgadmin
 ```
+
+or 
+
+run script file `copy-envs` in root folder:
+ - `.bat` for windows
+ - `.sh` for linux|unix
 
 ### Database client
 
@@ -72,7 +79,7 @@ Installing dependencies and building application.
 make install
 ```
 
-build app image
+Build app image
 
 ```shell
 make build-app-image  
