@@ -5,6 +5,9 @@ Zipcode-API is a SpringBoot project to server a simple location based on zipcode
 The main idea is, show a Java project using clean architecture and some tools like a jdbc-template, cache using Redis,
 SpringDoc, using tools like circuit breaker and cache.
 
+The API is integrated with ViaCEP to get the zipcode information. If it's found, the API will save the zipcode in the
+database and return the information. If not, the API will return from the database.
+
 ## Tech Stack
 
 **Built-in:**
@@ -16,6 +19,7 @@ SpringDoc, using tools like circuit breaker and cache.
 * [Redis](https://redis.io/)
 * [Postgres](https://www.postgresql.org/)
 * [Spring-CircuitBreaker-Resilience4j](https://spring.io/projects/spring-cloud-circuitbreaker)
+* [ViaCEP](https://viacep.com.br/)
 
 ## Getting Started
 
