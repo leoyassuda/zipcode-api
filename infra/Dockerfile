@@ -1,11 +1,4 @@
 FROM eclipse-temurin:21-jdk-jammy
-
-WORKDIR /app
-
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
-
-COPY src ./src
-
-CMD ["./mvnw", "spring-boot:run"]
+MAINTAINER leoyassuda
+COPY target/zipcode-1.0.0-SNAPSHOT.jar zipcode-1.0.0-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","/zipcode-1.0.0-SNAPSHOT.jar"]

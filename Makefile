@@ -18,7 +18,7 @@ start-db:
 	docker compose -f ./infra/docker-compose.yaml up postgres_primary postgres_replica pg_admin -d
 
 start-infra:
-	docker compose -f ./infra/docker-compose.yaml up postgrespostgres_primary postgres_replica redis pg_admin -d
+	docker compose -f ./infra/docker-compose.yaml up postgres_primary postgres_replica redis pg_admin -d
 
 start-app:
 	docker compose -f ./infra/docker-compose.yaml up app -d

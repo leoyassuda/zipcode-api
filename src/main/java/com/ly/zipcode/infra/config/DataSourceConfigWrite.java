@@ -14,8 +14,6 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class DataSourceConfigWrite {
 
-  public static final String PERSISTENCE_UNIT_NAME = "writeDataSource";
-
   @Bean(name = "writeDataSource")
   @ConfigurationProperties(prefix = "spring.datasource.write")
   public DataSource writeDataSource() {

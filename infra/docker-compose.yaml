@@ -1,32 +1,37 @@
+version: '3.8'
 x-postgres-common:
   &postgres-common
   image: postgres:14-alpine
   user: postgres
-  restart: always
   healthcheck:
-    test: 'pg_isready -U user --dbname=postgres'
+    test: 'pg_isready -U user123 --dbname=zipcode_db'
     interval: 10s
     timeout: 5s
     retries: 5
 
 services:
-#  app:
-#    image: zipcode-app:latest
-#    pull_policy: always
-#    container_name: ${DOCKER_IMAGE_NAME}
-#    build:
-#      dockerfile: Dockerfile
-#    env_file:
-#      - .env
-#    ports:
-#      - "8080:8080"
-#    networks:
-#      - zipcode-network
+  app:
+    image: zipcode-app:latest
+    pull_policy: always
+    container_name: zipcode-app
+    build:
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+      - postgres_primary
+      - postgres_replica
+    networks:
+      - zipcode-network
 
   postgres_primary:
     <<: *postgres-common
     ports:
-      - 5432:5432
+      - "5432:5432"
+    hostname: postgres_primary
     env_file:
       - .env.pgdb.primary
     command: |
@@ -45,7 +50,8 @@ services:
   postgres_replica:
     <<: *postgres-common
     ports:
-      - 5433:5432
+      - "5433:5432"
+    hostname: postgres_replica
     env_file:
       - .env.pgdb.replica
     command: |
@@ -69,7 +75,7 @@ services:
     container_name: zipcode-redis
     hostname: redis
     ports:
-      - '6379:6379'
+      - "6379:6379"
     networks:
       - zipcode-network
 
@@ -87,6 +93,9 @@ services:
       - "8888:80"
     env_file:
       - .env.pgadmin
+    depends_on:
+      - postgres_primary
+      - postgres_replica
     networks:
       - zipcode-network
 

@@ -20,7 +20,7 @@ spring:
       connection-timeout: 40000
       max-lifetime: 1200000
     read:
-      jdbc-url: jdbc:postgresql://${DB_REPLICA_HOST:localhost}:${DB_REPLICA_PORT:5433}/zipcode_db?currentSchema=public
+      jdbc-url: jdbc:postgresql://${DB_REPLICA_HOST:localhost}:${DB_REPLICA_PORT:5433}/zipcode_db
       username: ${POSTGRES_USER:user123}
       password: ${POSTGRES_PASSWORD:pass123}
       platform: postgresql
@@ -33,7 +33,7 @@ spring:
         pool-name: ReadHikariPool
         schema: public
     write:
-      jdbc-url: jdbc:postgresql://${DB_PRIMARY_HOST:localhost}:${DB_PRIMARY_PORT:5432}/zipcode_db?currentSchema=public
+      jdbc-url: jdbc:postgresql://${DB_PRIMARY_HOST:localhost}:${DB_PRIMARY_PORT:5432}/zipcode_db
       username: ${POSTGRES_USER:user123}
       password: ${POSTGRES_PASSWORD:pass123}
       platform: postgresql
@@ -83,7 +83,6 @@ logging:
 springdoc:
   cache:
     disabled: true
-  version: '@springdoc.version@'
   swagger-ui:
     path: /swagger-ui.html
     display-request-duration: true
