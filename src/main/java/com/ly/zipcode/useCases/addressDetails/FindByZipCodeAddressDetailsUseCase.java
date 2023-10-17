@@ -21,7 +21,9 @@ public class FindByZipCodeAddressDetailsUseCase {
 
   private final ViaCEPClient viaCep;
 
-  @CircuitBreaker(name = "CircuitBreakerService", fallbackMethod = "fallbackFindByZipcode")
+  private final String CIRCUIT_BREAKER_VIA_CEP_WEBSERVICE = "ViaCepWebService";
+
+  @CircuitBreaker(name = CIRCUIT_BREAKER_VIA_CEP_WEBSERVICE, fallbackMethod = "fallbackFindByZipcode")
   public AddressDetails execute(String zipcode) {
     var addressDetails = addressDetailsDomainMapper.toDomain(viaCep.getAddressDetailsByZipcode(zipcode));
     return upsertAddressDetailsUseCase.execute(addressDetails);
