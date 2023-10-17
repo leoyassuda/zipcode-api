@@ -70,7 +70,7 @@ resilience4j:
   circuitbreaker:
     instances:
       ViaCEPClient:
-        minimumNumberOfCalls: 3
+        minimumNumberOfCalls: 2
         failure-rate-threshold: 10
   timelimiter:
     instances:
