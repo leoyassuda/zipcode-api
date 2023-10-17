@@ -101,6 +101,41 @@ For more available commands, check the Makefile.
 
 Access [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) to view the API documentation.
 
+### Example: Get Address Details by Zip Code
+
+You can retrieve address details by sending a GET request to the following endpoint:
+
+`GET /addressDetails/zipcode/{CEP}`
+
+
+Replace `{CEP}` with the Brazilian zip code you want to look up.
+
+#### Request
+
+To make a request using a tool like `curl`, use the following command:
+
+```shell
+curl -X GET http://localhost:8080/addressDetails/zipcode/12345678
+```
+
+Response
+A successful response will return address details in JSON format, for example:
+```json
+{
+  "id": "d2f72ace-dcfa-4143-8213-be853794e7bf",
+  "zipcode": "01310-200",
+  "address": "Avenida Paulista",
+  "additionalAddress": "Lado ímpar",
+  "neighborhood": "Bela Vista",
+  "city": "São Paulo",
+  "state": "SP",
+  "ibge": "3550308",
+  "gia": "1004",
+  "ddd": "11",
+  "siafi": "7107"
+}
+```
+
 ## Utils
 
 Here are some useful commands:
