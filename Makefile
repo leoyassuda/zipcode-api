@@ -36,4 +36,6 @@ rm-app:
 	docker stop $(DOCKER_APP_IMAGE_NAME)
 	docker rm $(DOCKER_APP_IMAGE_NAME)
 
+all: install build-app-image start
+
 restart: stop start
