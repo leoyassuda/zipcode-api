@@ -1,16 +1,14 @@
 # Zipcode-API
 
-Zipcode-API is a SpringBoot project to server a simple location based on zipcode.
+Zipcode-API is a Spring Boot project that serves location information based on Brazilian zip codes.
 
-The main idea is, show a Java project using clean architecture and some tools like a jdbc-template, cache using Redis,
-SpringDoc, using tools like circuit breaker and cache.
+The main idea behind this project is to showcase a Java application using a clean architecture and various tools, including the JDBC template, Redis caching, SpringDoc, circuit breakers, and caching mechanisms.
 
-The API is integrated with ViaCEP to get the zipcode information. If it's found, the API will save the zipcode in the
-database and return the information. If not, the API will return from the database.
+The API is integrated with ViaCEP to retrieve zip code information. If the information is found, the API will save the zip code in the database and return the information. If not, the API will retrieve it from the database.
 
 ## Tech Stack
 
-**Built-in:**
+### Tools and Technologies:
 
 * [Maven](https://maven.apache.org/)
 * [Spring](https://spring.io/)
@@ -35,13 +33,12 @@ database and return the information. If not, the API will return from the databa
 git clone https://github.com/leoyassuda/zipcode-api
 ```
 
-### Infra Setup
+### Infrastructure Setup
 
-This project is based on Docker to start all dependencies before the application.
+This project uses Docker to set up all dependencies before running the application. <br>
+In the infra folder, you'll find all the files needed for the development environment setup.
 
-In `infra` folder exists all files to set up the development environment.
-
-copy and edit values examples `env` files:
+Copy and edit the example env files:
 ```shell
 cp .env.example .env
 cp .env.pgdb.primary.example .env.pgdb.primary
@@ -51,7 +48,7 @@ cp .env.pgadmin.example .env.pgadmin
 
 or 
 
-run script file `copy-envs` in root folder:
+Alternatively, you can run the copy-envs script in the root folder:
  - `.bat` for windows
  - `.sh` for linux|unix
 
@@ -60,15 +57,15 @@ run script file `copy-envs` in root folder:
 Database client:
 
 - pg_admin:
-  - A powerful tool to admin Postgres instances. 
-  - to login, see on the `env.pgadmin` file.
+  - A powerful tool for managing Postgres instances. 
+  - to log in, see on the `env.pgadmin` file.
   - ![an image showing the login the page of pg-admin](img/pg-admin-login.png "pg admin login-page")
 
 - Redis client:
 
 - redisinsight:
-  - A clean and great to access Redis instante. 
-  - to login, can use localhost and port default.
+  - A clean and user-friendly tool for accessing Redis instances.
+  - You can use the default localhost and port for login.
   - ![an image showing form page of redisinsight](img/redis-insight-login.png "redisinsight login-form")
 
 ## Running
@@ -98,15 +95,15 @@ To start everything
 make start
 ```
 
-See more commands in `Makefile`
+For more available commands, check the Makefile.
 
 ## API Document
 
-Access [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) to see the API documentation.
+Access [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) to view the API documentation.
 
 ## Utils
 
-Some util commands
+Here are some useful commands:
 
 #### create image using maven
 
